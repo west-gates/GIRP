@@ -35,14 +35,7 @@ class Tree(object):
         self.right_wt = None
         self.morta = None
         self.internal_nodes = None
-        
-    def lookup(self, x):
-        """Returns the predicted value given the parameters."""
-        if self.left == None:
-            return self.predict
-        if x[self.split_var] <= self.split_val:
-            return self.left.lookup(x)
-        return self.right.lookup(x)
+
 
     def lookup_df(self, df):
         """Run through the built tree"""
@@ -82,11 +75,6 @@ class Tree(object):
         cur_avg = cur_sum / float(cur_itn)
         
         return cur_avg, cur_sum, cur_itn
-
-    
-    def predict_all(self, data):
-        """Returns the predicted values for some list of data points."""
-        return map(lambda x: self.lookup(x), data)
         
     
     def find_weakest(self):
@@ -223,6 +211,7 @@ def cvt(df_in, dm_in, id_p, max_depth = 500, Nmin = 100):
 
     #20% data for held-out validation
     split_n = lambda lst, sz: [lst[i:i+sz] for i in range(0, len(lst), sz)]
+    random.seed(42)
     random.shuffle(id_p)
     id_cv = split_n(id_p, (len(id_p)/5)+1)
 
@@ -264,26 +253,6 @@ def cvt(df_in, dm_in, id_p, max_depth = 500, Nmin = 100):
 
 
     return trees, min_ind
-
-    
-
-def error_function(split_point, split_var, data):
-    """Function to minimize when choosing split point."""
-    data1 = []
-    data2 = []
-    for i in data:
-        if i[split_var] <= split_point:
-            data1.append(data[i])
-        else:
-            data2.append(data[i])
-    return region_error(data1) + region_error(data2)  
-    
-def region_error(data):
-    """Calculates sum of squared error for some node in the regression tree."""
-    data = numpy.array(data)
-    return numpy.sum((data - numpy.mean(data))**2)
-
-
 
 def error_func(split_point, ctbs, vals, Nmin):
     """Function to minimize when choosing split point."""
