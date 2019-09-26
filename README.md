@@ -1,5 +1,5 @@
 ## Global Model Interpretation via Recursive Partitionin (GIRP)
-This paper implements the menthod described in paper [Global Model Interpretation via Recursive Partitionin](https://arxiv.org/abs/1802.04253). The implementation is based on the project [Python-Regression-Tree-Forest](https://github.com/chandarb/Python-Regression-Tree-Forest). Please cite both works properly if you are using them in your work.
+This paper implements the menthod described in paper [Global Model Interpretation via Recursive Partitioning](https://arxiv.org/abs/1802.04253). The implementation is based on the project [Python-Regression-Tree-Forest](https://github.com/chandarb/Python-Regression-Tree-Forest). Please cite both works properly if you are using them in your work.
 
 ### Prepare data
 You should prepare the input data as the example `dm_txt.csv` and `df_txt.csv` in this repo. 
